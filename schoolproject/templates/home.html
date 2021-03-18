@@ -1,4 +1,4 @@
-<html>
+<html style="font-family:helvetica">
     <head>
         <meta charset="utf-8">
         <meta name = "viewport" content="width=device-width">
@@ -8,12 +8,14 @@
         </div>
     </head>
     <body>
+        <hr>
         <div align=center>
-        <form action="/home" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type ="submit" value="Submit">
-        </form>
-        </div>
+            <form action="/home" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type ="submit" value="Submit">
+            </form>
+            </div>
+        <hr>
     </body>
 </html>

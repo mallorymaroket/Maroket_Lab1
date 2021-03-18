@@ -1,4 +1,5 @@
-<html>
+{% load static %}
+<html style="font-family:helvetica">
     <head>
         <meta charset="utf-8">
         <meta name = "viewport" content="width=device-width">
@@ -9,11 +10,32 @@
     </head>
     <body>
         <div align=center>
+        <hr>
             <a href="home">Home</a> &nbsp;&nbsp;
             <a href="profile">Profile</a> &nbsp;&nbsp;
             <a href="key">Key</a> &nbsp;&nbsp;
             <a href="thisweek">This Week</a> &nbsp;&nbsp;
             <a href="today">Today</a>
+        <hr>
+            <img src="{% static 'media/mallory.jpg' %}"> <br>
+            <p style="font-size:24px"> Mallory Belicia T. Maroket </p>
+        <hr>
+            <p style="font-size:20px"><b><i> About Her </i></b></p>
+        <hr>
+            <p> 
+                <b>Nickname: </b>Malloy <br>
+                <b>Birthdate: </b>February 20, 2002 <br>
+                <b>Age: </b>19 years old <br>
+                <b>Nationality: </b>Filipino
+            </p>
+        <hr>
+        <p style="font-size: 20px"><b><i> Short Biography </b></i></p>
+        <hr>
+            <p>
+                Mallory has a family of eight, being the fourth child out of her six siblings. She also has two dogs and one cat. <br>
+                She likes traveling, binging shows and making art. She also used to be a part of her high school's cheerleading squad. <br>
+                She is currently in her second year in Ateneo de Manila University, taking up BS Computer Science.
+            </p>
         </div>
     </body>
 </html>
