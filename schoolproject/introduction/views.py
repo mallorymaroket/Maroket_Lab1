@@ -12,4 +12,16 @@ def home_view(request):
                         return render(request, "name.html", {"name":name})
         else:
                 form = NameForm()
-        return render(request, "home.html", {"form": NameForm})
+                return render(request, "home.html", {"form": NameForm})
+
+def profile_view(request):
+        return render(request, "profile.html")
+
+def key_view(request):
+        return render(request, "key.html")
+
+def thisweek_view(request):
+        return render(request, "thisweek.html")
+
+def today_view(request):
+        return render(request, "today.html")
