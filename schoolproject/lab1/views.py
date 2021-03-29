@@ -25,3 +25,14 @@ def thisweek_view(request):
 
 def today_view(request):
         return render(request, "today.html")
+
+""" def change_picture(request):
+        if request.method == "POST":
+
+        else:
+
+
+
+def edit_nickname(request):
+
+def edit_bio(request): """
