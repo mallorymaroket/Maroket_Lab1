@@ -8,8 +8,7 @@ def home_view(request):
         if request.method == "POST":
                 form = NameForm(request.POST)
                 if form.is_valid():
-                        name = form.cleaned_data["nickname"]
-                        return render(request, "name.html", {"name":name})
+                        return render(request, "home.html", {"name":form.cleaned_data["name"]})
         else:
                 form = NameForm()
                 return render(request, "home.html", {"form": NameForm})
