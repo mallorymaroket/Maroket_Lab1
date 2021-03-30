@@ -7,12 +7,32 @@
         <div align=center>
             <h1> ✌︎ Profile ✌︎ </h1>
         </div>
+        <hr>
     </head>
     <body>
         <div align=center>
-        <hr>
-            <img src="{% static 'image/default.png' %}" width="300"> <br>
-            <input type ="submit" value="Change">
+            {% if upload %}
+                <img src="{{ upload.picture.url }}" width="300", alt="Updated Profile Picture"> <br>
+                <table>
+                    <tr> 
+                        <th> Nickname: </th>
+                        <td> Your Nickname </td>
+                        <td> <button type="button"> Edit </button> </td>
+                    </tr>
+                    <tr>
+                        <th> Bio: </th>
+                        <td> A short description about yourself. </td>
+                        <td> <button type="button"> Edit </button> </td>
+                    </tr>
+                </table>
+            {% else %}
+                <img src="{% static 'image/default.png' %}" width="300">
+                <form method = "post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"> Change </button>
+                </form>
+            {% endif %}
         <hr>
             <a href="home">Home</a> &nbsp;&nbsp;
             <a href="profile">Profile</a> &nbsp;&nbsp;

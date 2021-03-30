@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.conf import settings
 
-from .forms import NameForm
+from .forms import *
 
 
 def home_view(request):
@@ -14,7 +14,15 @@ def home_view(request):
                 return render(request, "home.html", {"form": NameForm})
 
 def profile_view(request):
-        return render(request, "profile.html")
+        if request.method == "POST":
+                form = ProfileForm(request.POST, request.FILES)
+                if form.is_valid():
+                        upload = form.instance
+                        return render(request, "profile.html", {"upload":upload})
+                        # form = InfoForm(request.POST)
+        else:
+                form = ProfileForm()
+                return render(request, 'profile.html', {'form':form})
 
 def key_view(request):
         return render(request, "key.html")
@@ -25,13 +33,24 @@ def thisweek_view(request):
 def today_view(request):
         return render(request, "today.html")
 
-""" def change_picture(request):
+""" def upload_profile(request):
+        if request.method == POST:
+                form = ProfileForm(request.POST, request.FILES)
+                if form.is_valid():
+                        form.save()
+                        upload = form.instance
+                        return render(request, "profile.html", {"upload":upload})
+                else:
+                        form = PictureForm()
+                return render(request, 'profile.html', {'form':form})
+
+def upload_picture(request):
         if request.method == "POST":
-
+                form = PictureForm(request.POST, request.FILES)
+                if form.is_valid():
+                        form.save()
+                        upload = form.instance
+                        return render(request, "profile.html", {"upload":upload})
         else:
-
-
-
-def edit_nickname(request):
-
-def edit_bio(request): """
+                form = PictureForm()
+                return render(request, "profile.html", {"form":PictureForm}) """

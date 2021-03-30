@@ -1,6 +1,9 @@
 from django.urls import path
 
-from .views import home_view, profile_view, key_view, thisweek_view, today_view
+from django.conf import settings
+from django.conf.urls.static import static
+
+from .views import *
 
 
 urlpatterns = [
@@ -9,4 +12,8 @@ urlpatterns = [
     path("key", key_view, name="key"),
     path("thisweek", thisweek_view, name="thisweek"),
     path("today", today_view, name="today"),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
