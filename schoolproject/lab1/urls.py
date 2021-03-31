@@ -12,8 +12,4 @@ urlpatterns = [
     path("key", key_view, name="key"),
     path("thisweek", thisweek_view, name="thisweek"),
     path("today", today_view, name="today"),
-
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

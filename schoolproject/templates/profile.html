@@ -11,22 +11,46 @@
     </head>
     <body>
         <div align=center>
-            {% if upload %}
-                <img src="{{ upload.picture.url }}" width="300", alt="Updated Profile Picture"> <br>
+            {% if upload_pic %}
+                <img src="{{ upload_pic.picture.url }}" height="300", alt="Updated Profile Picture"> <br>
                 <table>
                     <tr> 
                         <th> Nickname: </th>
-                        <td> Your Nickname </td>
-                        <td> <button type="button"> Edit </button> </td>
+                        <td>
+                            {% if update_info %}
+                                {{ nickname }}
+                            {% else %}
+                                Your Nickname
+                            {% endif %}
+                        </td>
+                        <td> 
+                            <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="button"> Edit </button>
+                            </form>
+                        </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <th> Bio: </th>
-                        <td> A short description about yourself. </td>
-                        <td> <button type="button"> Edit </button> </td>
+                        <td>
+                            {% if update_info %}
+                                {{ bio }}
+                            {% else %}
+                                A short description about yourself.
+                            {% endif %}
+                        </td>
+                        <td> 
+                            <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="button"> Edit </button> </td>
+                            </form>
+                        </td>
                     </tr>
                 </table>
             {% else %}
-                <img src="{% static 'image/default.png' %}" width="300">
+                <img src="{% static 'image/default.png' %}" height="300">
                 <form method = "post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}

@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-#Create your models here
+from .models import UploadProfile
+
+admin.site.register(UploadProfile)
