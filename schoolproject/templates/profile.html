@@ -11,52 +11,42 @@
     </head>
     <body>
         <div align=center>
-            {% if upload_pic %}
-                <img src="{{ upload_pic.picture.url }}" height="300", alt="Updated Profile Picture"> <br>
-                <table>
-                    <tr> 
-                        <th> Nickname: </th>
-                        <td>
-                            {% if update_info %}
-                                {{ nickname }}
-                            {% else %}
-                                Your Nickname
-                            {% endif %}
-                        </td>
-                        <td> 
-                            <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="button"> Edit </button>
-                            </form>
-                        </td>
-                    </tr>
-                     <tr>
-                        <th> Bio: </th>
-                        <td>
-                            {% if update_info %}
-                                {{ bio }}
-                            {% else %}
-                                A short description about yourself.
-                            {% endif %}
-                        </td>
-                        <td> 
-                            <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="button"> Edit </button> </td>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+            {% if update_info %}
+                <img src="{{ update_info.picture.url }}" height="300", alt="Updated Profile Picture"> <br>
+                <p id="info"><b> Nickname: </b></p> 
+                    {{ nickname}}
+                <p id="info"><b> Bio: </b></p>
+                    {{ bio }}
             {% else %}
-                <img src="{% static 'image/default.png' %}" height="300">
-                <form method = "post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit"> Change </button>
-                </form>
+                <p id="pic"> <img src="{% static 'image/default.png' %}" height="300"> </p>
+                <button onclick="editInfo()"> Change </button>
+                <p id="info"><b> Nickname: </b></p>
+                    Your nickname 
+                <button onclick="editInfo()"> Edit </button> 
+                <p id="info"><b> Bio: </b></p>
+                    A short description about yourself
+                <button onclick="editInfo()"> Edit </button> 
             {% endif %}
+            <div hidden id="info_form">
+        <hr>
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" name="change_pic"> Save Profile </button>
+                </form>
+            </div>
+
+        <script>
+            function editInfo() {
+                var showIForm = document.getElementById("info_form");
+                if (showIForm.style.display == "none") {
+                    showIForm.style.display = "block";
+                } else {
+                    showIForm.style.display = "block";
+                }
+            }
+        </script>
+        
         <hr>
             <a href="home">Home</a> &nbsp;&nbsp;
             <a href="profile">Profile</a> &nbsp;&nbsp;

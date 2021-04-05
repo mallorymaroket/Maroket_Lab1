@@ -15,14 +15,14 @@ def home_view(request):
 
 def profile_view(request):
         if request.method == "POST":
-                form = ProfilePicForm(request.POST, request.FILES)
+                form = ProfileInfoForm(request.POST, request.FILES)
                 if form.is_valid():
                         # form.save()
-                        upload_pic = form.instance
-                        return render(request, "profile.html", {"upload_pic":upload_pic})          
+                        update_info = form.instance     
+                        return render(request, "profile.html", {"update_info":update_info, "nickname":form.cleaned_data["nickname"],"bio":form.cleaned_data["bio"]})                         
         else:
-                form = ProfilePicForm()
-                return render(request, 'profile.html', {'form':form})
+                form = ProfileInfoForm()
+                return render(request, "profile.html", {"form":ProfileInfoForm})
 
 def key_view(request):
         return render(request, "key.html")

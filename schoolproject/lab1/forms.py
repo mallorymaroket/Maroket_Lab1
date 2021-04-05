@@ -6,11 +6,9 @@ from .models import *
 class NameForm(forms.Form):
     name = forms.CharField(max_length=20)
 
-class ProfilePicForm(forms.ModelForm):
+class ProfileInfoForm(forms.ModelForm):
+    nickname = forms.CharField(max_length=20, label='Update Nickname:')
+    bio = forms.CharField(widget=forms.Textarea, label='Update Bio:')
     class Meta:
-        model = UploadProfile
+        model = UpdateProfile
         fields = ['picture']
-
-""" class ProfileInfoForm(forms.Form):
-    nickname = forms.CharField(max_length=20)
-    bio = forms.CharField(widget=forms.Textarea) """

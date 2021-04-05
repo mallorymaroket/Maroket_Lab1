@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import UploadProfile
+from .models import UpdateProfile
 
-admin.site.register(UploadProfile)
+admin.site.register(UpdateProfile)
