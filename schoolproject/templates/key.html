@@ -10,7 +10,32 @@
     <body>
         <hr>
         <div align=center>
-            <button type="submit" class="btn btn-primary"> Add Key </button>
+            {% if key %}
+                <p> <b>{{ key }}</b> {{ description }}</p>
+                <button onclick="addKey()"> Add Key </button>
+            {% else %}
+                <button onclick="addKey()"> Add Key </button>
+            {% endif %}
+
+            <dialog hidden id="key_form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" name="add_key"> Add Key </button>
+                </form>
+            </dialog>
+        
+            <script>
+                function addKey() {
+                    var showKForm = document.getElementById("key_form");
+                    if (showKForm.style.display == "none") {
+                        showKForm.style.display = "block";
+                    } else {
+                        showKForm.style.display = "block";
+                    }
+                }
+            </script>
+        
         <hr>
             <a href="home">Home</a> &nbsp;&nbsp;
             <a href="profile">Profile</a> &nbsp;&nbsp;

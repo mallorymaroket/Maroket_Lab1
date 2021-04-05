@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from bootstrap_modal_forms.generic import BSModalCreateView
 
 from .forms import *
 
@@ -25,7 +24,13 @@ def profile_view(request):
                 return render(request, "profile.html", {"form":ProfileInfoForm})
 
 def key_view(request):
-        return render(request, "key.html")
+        if request.method == "POST":
+                form = KeyForm(request.POST)
+                if form.is_valid():
+                        return render(request, "key.html", {"key":form.cleaned_data["key"], "description":form.cleaned_data["description"]})
+        else:
+                form = KeyForm()
+                return render(request, "key.html", {"form": KeyForm})
 
 def thisweek_view(request):
         return render(request, "thisweek.html")

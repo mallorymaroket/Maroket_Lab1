@@ -12,3 +12,13 @@ class ProfileInfoForm(forms.ModelForm):
     class Meta:
         model = UpdateProfile
         fields = ['picture']
+
+class KeyForm(forms.Form):
+    KEY_TYPES=[
+        ('Task:','Task'),
+        ('Event:','Event'),
+        ('Note:','Note'),
+    ]
+
+    key = forms.CharField(widget=forms.Select(choices=KEY_TYPES),label='Key:')
+    description = forms.CharField(max_length=50, label='Description:')

@@ -13,17 +13,17 @@
         <div align=center>
             {% if update_info %}
                 <img src="{{ update_info.picture.url }}" height="300", alt="Updated Profile Picture"> <br>
-                <p id="info"><b> Nickname: </b></p> 
+                <p><b> Nickname: </b></p> 
                     {{ nickname}}
-                <p id="info"><b> Bio: </b></p>
+                <p><b> Bio: </b></p>
                     {{ bio }}
             {% else %}
-                <p id="pic"> <img src="{% static 'image/default.png' %}" height="300"> </p>
+                <p> <img src="{% static 'image/default.png' %}" height="300"> </p>
                 <button onclick="editInfo()"> Change </button>
-                <p id="info"><b> Nickname: </b></p>
+                <p><b> Nickname: </b></p>
                     Your nickname 
                 <button onclick="editInfo()"> Edit </button> 
-                <p id="info"><b> Bio: </b></p>
+                <p><b> Bio: </b></p>
                     A short description about yourself
                 <button onclick="editInfo()"> Edit </button> 
             {% endif %}
