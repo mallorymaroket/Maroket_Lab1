@@ -33,7 +33,13 @@ def key_view(request):
                 return render(request, "key.html", {"form": KeyForm})
 
 def thisweek_view(request):
-        return render(request, "thisweek.html")
+        if request.method == "POST":
+                form = ThisWeekForm(request.POST)
+                if form.is_valid():
+                        return render(request, "thisweek.html", {"key":form.cleaned_data["key"], "details":form.cleaned_data["details"]})
+        else:
+                form = KeyForm()
+                return render(request, "thisweek.html", {"form": ThisWeekForm})
 
 def today_view(request):
         return render(request, "today.html")

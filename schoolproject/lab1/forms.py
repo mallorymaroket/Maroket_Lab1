@@ -13,12 +13,16 @@ class ProfileInfoForm(forms.ModelForm):
         model = UpdateProfile
         fields = ['picture']
 
-class KeyForm(forms.Form):
-    KEY_TYPES=[
-        ('Task:','Task'),
-        ('Event:','Event'),
-        ('Note:','Note'),
+KEY_TYPES=[
+        ('Task','Task'),
+        ('Event','Event'),
+        ('Note','Note'),
     ]
 
+class KeyForm(forms.Form):
     key = forms.CharField(widget=forms.Select(choices=KEY_TYPES),label='Key:')
     description = forms.CharField(max_length=50, label='Description:')
+
+class ThisWeekForm(forms.Form):
+    key = forms.CharField(widget=forms.Select(choices=KEY_TYPES),label='Key:')
+    details = forms.CharField(max_length=50, label='Details:')
