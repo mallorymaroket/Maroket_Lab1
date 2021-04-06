@@ -21,8 +21,16 @@
             <hr>
                 <button onclick="addItem()"> Add Item </button>
             {% else %}
+            <hr>
                 <button onclick="addItem()"> Add Item </button>
             {% endif %}
+
+            <hr>
+                <a href="home">Home</a> &nbsp;&nbsp;
+                <a href="profile">Profile</a> &nbsp;&nbsp;
+                <a href="key">Key</a> &nbsp;&nbsp;
+                <a href="thisweek">This Week</a> &nbsp;&nbsp;
+                <a href="today">Today</a>
 
             <dialog hidden id="thisweek_form">
                 <form action="" method="post">
@@ -34,20 +42,18 @@
         
             <script>
                 function addItem() {
-                    var showTWForm = document.getElementById("thisweek_form");
-                    if (showTWForm.style.display == "none") {
-                        showTWForm.style.display = "block";
+                    var openTWForm = document.getElementById("thisweek_form");
+                    if (openTWForm.style.display == "none") {
+                        openTWForm.style.display = "block";
                     } else {
-                        showTWForm.style.display = "block";
+                        openTWForm.style.display = "block";
                     }
                 }
+                function editItem() {
+                    
+                }
             </script>
-        <hr>
-            <a href="home">Home</a> &nbsp;&nbsp;
-            <a href="profile">Profile</a> &nbsp;&nbsp;
-            <a href="key">Key</a> &nbsp;&nbsp;
-            <a href="thisweek">This Week</a> &nbsp;&nbsp;
-            <a href="today">Today</a>
+    
         </div>
     </body>
 </html>

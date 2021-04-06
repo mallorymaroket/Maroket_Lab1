@@ -5,16 +5,51 @@
         <title> Today </title>
         <div align=center>
             <h1> ✧ Today ✧ </h1>
+        <hr>
+            <h2><b>03.05.MON</b></h2>
         </div>
     </head>
     <body>
         <div align=center>
+            {% if key %}
+            <p> <b>{{ key }}</b>: {{ details }}</p>
+            <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+            <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+            {% if key == "Task" %}
+                <button onclick="doneItem()"> Mark as done</button>
+            {% endif %}
+        <hr>
+            <button onclick="addItem()"> Add Item </button>
+            {% else %}
+        <hr>
+            <button onclick="addItem()"> Add Item </button>
+            {% endif %}
+
         <hr>
             <a href="home">Home</a> &nbsp;&nbsp;
             <a href="profile">Profile</a> &nbsp;&nbsp;
             <a href="key">Key</a> &nbsp;&nbsp;
             <a href="thisweek">This Week</a> &nbsp;&nbsp;
             <a href="today">Today</a>
+
+            <dialog hidden id="thisweek_form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" name="add_item"> Add Item </button>
+                </form>
+            </dialog>
+    
+        <script>
+            function addItem() {
+                var showTWForm = document.getElementById("thisweek_form");
+                if (showTWForm.style.display == "none") {
+                    showTWForm.style.display = "block";
+                } else {
+                    showTWForm.style.display = "block";
+                }
+            }
+        </script>
         </div>
     </body>
 </html>

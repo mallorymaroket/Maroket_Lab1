@@ -3,26 +3,22 @@ from bootstrap_modal_forms.forms import BSModalModelForm
 
 from .models import *
 
-class NameForm(forms.Form):
-    name = forms.CharField(max_length=20)
+class NameForm(forms.ModelForm):
+    class Meta:
+        model = InputName
+        fields = ['name']
 
 class ProfileInfoForm(forms.ModelForm):
-    nickname = forms.CharField(max_length=20, label='Update Nickname:')
-    bio = forms.CharField(widget=forms.Textarea, label='Update Bio:')
     class Meta:
         model = UpdateProfile
-        fields = ['picture']
+        fields = ['picture', 'nickname', 'bio']
 
-KEY_TYPES=[
-        ('Task','Task'),
-        ('Event','Event'),
-        ('Note','Note'),
-    ]
+class KeyForm(forms.ModelForm):
+    class Meta:
+        model = AddKey
+        fields = ['key', 'description']
 
-class KeyForm(forms.Form):
-    key = forms.CharField(widget=forms.Select(choices=KEY_TYPES),label='Key:')
-    description = forms.CharField(max_length=50, label='Description:')
-
-class ThisWeekForm(forms.Form):
-    key = forms.CharField(widget=forms.Select(choices=KEY_TYPES),label='Key:')
-    details = forms.CharField(max_length=50, label='Details:')
+class ThisWeekForm(forms.ModelForm):
+    class Meta:
+        model = AddItem
+        fields = ['key', 'details']
