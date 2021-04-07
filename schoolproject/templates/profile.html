@@ -11,33 +11,73 @@
     </head>
     <body>
         <div align=center>
-            {% if update_info %}
-                <img src="{{ update_info.picture.url }}" height="300", alt="Updated Profile Picture"> <br>
-                <p><b> Nickname: </b></p> 
-                    {{ nickname}}
-                <p><b> Bio: </b></p>
-                    {{ bio }}
+            {% if upload_picture %}
+                <img src="{{ MEDIA_URL }}{{ last_picture.picture }}" height="300", alt="Updated Profile Picture">
+            {% elif update_info %}
+                <img src="{{ MEDIA_URL }}{{ last_picture.picture }}" height="300", alt="Updated Profile Picture">
             {% else %}
-                <p> <img src="{% static 'image/default.png' %}" height="300"> </p>
-                <button onclick="editInfo()"> Change </button>
+                <img src="{% static 'image/default.png' %}" height="300">
+            {% endif %}
+            <button onclick="uploadPic()"> Change </button>
+
+
+            {% if update_info %}    
+                <p><b> Nickname: </b></p> 
+                    {{ last_info.nickname }}
+                <button onclick="updateInfo()"> Edit </button> 
+                <p><b> Bio: </b></p>
+                    {{ last_info.bio }}
+                <button onclick="updateInfo()"> Edit </button>
+            {% elif upload_picture %}
+                <p><b> Nickname: </b></p> 
+                {% if update_info %}
+                    {{ last_info.nickname }}
+                {% else %}
+                    Your nickname
+                {% endif %}
+                <button onclick="updateInfo()"> Edit </button> 
+                <p><b> Bio: </b></p>
+                {% if update_info %}
+                    {{ last_info.bio }}
+                {% else %}
+                    A short description about yourself
+                {% endif %}
+                <button onclick="updateInfo()"> Edit </button>
+            {% else %}
                 <p><b> Nickname: </b></p>
                     Your nickname 
-                <button onclick="editInfo()"> Edit </button> 
+                <button onclick="updateInfo()"> Edit </button> 
                 <p><b> Bio: </b></p>
                     A short description about yourself
-                <button onclick="editInfo()"> Edit </button> 
+                <button onclick="updateInfo()"> Edit </button> 
             {% endif %}
-            <div hidden id="info_form">
-        <hr>
+
+            <dialog hidden id="picture_form">
                 <form method = "post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" name="change_pic"> Save Profile </button>
+                    {{ formpicture.as_p }}
+                    <button type="submit"> Upload Picture </button>
                 </form>
-            </div>
+            </dialog>
+            <dialog hidden id="info_form">
+                <form method = "post">
+                    {% csrf_token %}
+                    {{ forminfo.as_p }}
+                    <button type="submit"> Update Information </button>
+                </form>
+            </dialog>
 
         <script>
-            function editInfo() {
+            function uploadPic() {
+                var showPForm = document.getElementById("picture_form");
+                if (showPForm.style.display == "none") {
+                    showPForm.style.display = "block";
+                } else {
+                    showPForm.style.display = "block";
+                }
+
+            }
+            function updateInfo() {
                 var showIForm = document.getElementById("info_form");
                 if (showIForm.style.display == "none") {
                     showIForm.style.display = "block";

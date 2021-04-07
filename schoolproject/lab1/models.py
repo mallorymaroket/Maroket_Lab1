@@ -3,8 +3,10 @@ from django.db import models
 class InputName(models.Model):
     name = models.CharField(max_length=20)
 
-class UpdateProfile(models.Model):
+class UploadPicture(models.Model):
     picture = models.ImageField(upload_to='image/', verbose_name='Select Profile Picture')
+
+class UpdateInfo(models.Model):
     nickname = models.CharField(max_length=20, verbose_name='Update Nickname:')
     bio = models.TextField(verbose_name='Update Bio:')
 

@@ -8,10 +8,15 @@ class HomeForm(forms.ModelForm):
         model = InputName
         fields = ['name']
 
-class ProfileForm(forms.ModelForm):
+class ProfilePicForm(forms.ModelForm):
     class Meta:
-        model = UpdateProfile
-        fields = ['picture', 'nickname', 'bio']
+        model = UploadPicture
+        fields = ['picture']
+
+class ProfileInfoForm(forms.ModelForm):
+    class Meta:
+        model = UpdateInfo
+        fields = ['nickname', 'bio']
 
 class KeyForm(forms.ModelForm):
     class Meta:
