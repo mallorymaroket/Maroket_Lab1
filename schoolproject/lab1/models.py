@@ -18,6 +18,10 @@ class AddKey(models.Model):
     key = models.CharField(max_length=5,choices=KEY_TYPES, verbose_name='Key:')
     description = models.CharField(max_length=50, verbose_name='Description:')
 
-class AddItem(models.Model):
+class AddItemThisWeek(models.Model):
+    key = models.CharField(max_length=5, choices=KEY_TYPES, verbose_name='Key:')
+    details = models.CharField(max_length=50, verbose_name='Details:')
+
+class AddItemToday(models.Model):
     key = models.CharField(max_length=5, choices=KEY_TYPES, verbose_name='Key:')
     details = models.CharField(max_length=50, verbose_name='Details:')

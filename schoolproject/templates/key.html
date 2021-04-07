@@ -11,7 +11,18 @@
         <hr>
         <div align=center>
             {% if key %}
-                <p> <b>{{ key }}</b> - {{ description }}</p>
+                <table border="1" width="300">
+                    <tr align="center">
+                        <td><b> Key </b></td>
+                         <td><b> Description </b></td>
+                    </tr align="center">
+                    {% for x in allkeys %}
+                        <tr>
+                            <td> {{ x.key }} </td>
+                            <td> {{ x.description }} </td>
+                        </tr>
+                {% endfor %}
+                </table>
         <hr>
                 <button onclick="addKey()"> Add Key </button>
             {% else %}

@@ -12,12 +12,26 @@
     <body>
         <div align=center>
             {% if key %}
-                <p> <b>{{ key }}</b>: {{ details }}</p>
-                <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
-                <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
-                {% if key == "Task" %}
-                <button onclick="doneItem()"> Mark as done</button>
-                {% endif %}
+                <table border="1" width="600">
+                    <tr align="center">
+                        <td><b> Key </b></td>
+                        <td><b> Details </b></td>
+                        <td></td>
+                    </tr align="center">
+                    {% for x in allitems %}
+                        <tr>
+                            <td> {{ x.key }} </td>
+                            <td> {{ x.details }} </td>
+                            <td align="center">
+                                <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+                                <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+                                {% if x.key == "Task" %}
+                                    <button onclick="doneItem()"> Mark as done</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                {% endfor %}
+                </table>
             <hr>
                 <button onclick="addItem()"> Add Item </button>
             {% else %}
@@ -50,7 +64,7 @@
                     }
                 }
                 function editItem() {
-                    
+
                 }
             </script>
     
