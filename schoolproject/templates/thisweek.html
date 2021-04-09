@@ -5,34 +5,40 @@
         <title> This Week </title>
         <div align=center>
             <h1> ☾ This Week ☽ </h1>
-        <hr>
-            <h2><b>03.05.MON - 03.11.SUN</b></h2>
+            <h2><b> 03.05.MON - 03.11.SUN </b></h2>
         </div>
     </head>
     <body>
         <div align=center>
             {% if key %}
+            <hr>
                 <table border="1" width="600">
                     <tr align="center">
                         <td><b> Key </b></td>
                         <td><b> Details </b></td>
                         <td></td>
-                    </tr align="center">
+                    </tr>
                     {% for x in allitems %}
+                    <div id="item">
                         <tr>
-                            <td> {{ x.key }} </td>
+                            <td><div id="task"> {{ x.key }} </div></td>
                             <td> {{ x.details }} </td>
-                            <td align="center">
-                                <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
-                                <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+                            <td align=center>
                                 {% if x.key == "Task" %}
-                                    <button onclick="doneItem()"> Mark as done</button>
+                                <p id="taskbtns">
+                                    <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+                                    <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+                                    <button onclick="markDone()"> Mark as Done </button>
+                                </p>
+                                {% else %}
+                                    <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+                                    <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
                                 {% endif %}
                             </td>
                         </tr>
+                    </div>
                 {% endfor %}
-                </table>
-            <hr>
+                </table> <br>
                 <button onclick="addItem()"> Add Item </button>
             {% else %}
             <hr>
@@ -50,7 +56,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <button type="submit" name="add_item"> Add Item </button>
+                    <button type="submit"> Add Item </button>
                 </form>
             </dialog>
         
@@ -63,11 +69,17 @@
                         openTWForm.style.display = "block";
                     }
                 }
-                function editItem() {
-
+                function deleteItem() {
+                    var deleteRow = document.getElementById("item");
+                    deleteRow.innerHTML = "";
+                }
+                function markDone() {
+                    var changeKey = document.getElementById("task");
+                    changeKey.innerHTML = "Task Done";
+                    var removeBtns = document.getElementById("taskbtns");
+                    removeBtns.innerHTML = "";
                 }
             </script>
-    
         </div>
     </body>
 </html>

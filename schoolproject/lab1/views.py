@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import *
 
@@ -97,8 +97,8 @@ def today_view(request):
                         "allitems":allitems,
                         "form":TodayForm,
                         }
-
                         return render(request, "today.html", context)
+
         else:
                 form = TodayForm()
-                return render(request, "today.html", {"form": ThisWeekForm})
+                return render(request, "today.html", {"form": TodayForm})

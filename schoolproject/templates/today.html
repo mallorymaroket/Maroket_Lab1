@@ -5,65 +5,81 @@
         <title> Today </title>
         <div align=center>
             <h1> ✧ Today ✧ </h1>
-        <hr>
-            <h2><b>03.05.MON</b></h2>
+            <h2><b> 03.05.MON </b></h2>
         </div>
     </head>
     <body>
         <div align=center>
             {% if key %}
-            <table border="1" width="600">
-                <tr align="center">
-                    <td><b> Key </b></td>
-                    <td><b> Details </b></td>
-                    <td></td>
-                </tr align="center">
-                {% for x in allitems %}
-                    <tr>
-                        <td> {{ x.key }} </td>
-                        <td> {{ x.details }} </td>
-                        <td align="center">
-                            <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
-                            <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
-                            {% if x.key == "Task" %}
-                                <button onclick="doneItem()"> Mark as done</button>
-                            {% endif %}
-                        </td>
+            <hr>
+                <table border="1" width="600">
+                    <tr align="center">
+                        <td><b> Key </b></td>
+                        <td><b> Details </b></td>
+                        <td></td>
                     </tr>
+                    {% for x in allitems %}
+                    <div id="item">
+                        <tr>
+                            <td><div id="task"> {{ x.key }} </div></td>
+                            <td> {{ x.details }} </td>
+                            <td align=center>
+                                {% if x.key == "Task" %}
+                                <p id="taskbtns">
+                                    <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+                                    <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+                                    <button onclick="markDone()"> Mark as Done </button>
+                                </p>
+                                {% else %}
+                                    <button onclick="editItem()"> Edit </button> &nbsp;&nbsp;
+                                    <button onclick="deleteItem()"> Delete</button> &nbsp;&nbsp;
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </div>
                 {% endfor %}
-                </table>
-        <hr>
-            <button onclick="addItem()"> Add Item </button>
+                </table> <br>
+                <button onclick="addItem()"> Add Item </button>
             {% else %}
-        <hr>
-            <button onclick="addItem()"> Add Item </button>
+            <hr>
+                <button onclick="addItem()"> Add Item </button>
             {% endif %}
 
-        <hr>
-            <a href="home">Home</a> &nbsp;&nbsp;
-            <a href="profile">Profile</a> &nbsp;&nbsp;
-            <a href="key">Key</a> &nbsp;&nbsp;
-            <a href="thisweek">This Week</a> &nbsp;&nbsp;
-            <a href="today">Today</a>
+            <hr>
+                <a href="home">Home</a> &nbsp;&nbsp;
+                <a href="profile">Profile</a> &nbsp;&nbsp;
+                <a href="key">Key</a> &nbsp;&nbsp;
+                <a href="thisweek">This Week</a> &nbsp;&nbsp;
+                <a href="today">Today</a>
 
-            <dialog hidden id="thisweek_form">
+            <dialog hidden id="today_form">
                 <form action="" method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <button type="submit" name="add_item"> Add Item </button>
+                    <button type="submit"> Add Item </button>
                 </form>
             </dialog>
-    
-        <script>
-            function addItem() {
-                var showTWForm = document.getElementById("thisweek_form");
-                if (showTWForm.style.display == "none") {
-                    showTWForm.style.display = "block";
-                } else {
-                    showTWForm.style.display = "block";
+        
+            <script>
+                function addItem() {
+                    var openTForm = document.getElementById("today_form");
+                    if (openTForm.style.display == "none") {
+                        openTForm.style.display = "block";
+                    } else {
+                        openTForm.style.display = "block";
+                    }
                 }
-            }
-        </script>
+                function deleteItem() {
+                    var deleteRow = document.getElementById("item");
+                    deleteRow.innerHTML = "";
+                }
+                function markDone() {
+                    var changeKey = document.getElementById("task");
+                    changeKey.innerHTML = "Task Done";
+                    var removeBtns = document.getElementById("taskbtns");
+                    removeBtns.innerHTML = "";
+                }
+            </script>
         </div>
     </body>
 </html>
